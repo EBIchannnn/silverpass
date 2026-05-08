@@ -1,0 +1,488 @@
+[
+  {
+    "category": "データ型と変数",
+    "difficulty": 1,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "int x = 10;\ndouble y = x / 3;\nSystem.out.println(y);",
+    "options": ["3.0", "3.3333333333333335", "3", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "整数同士の割り算は整数として計算される。10/3=3（整数）がdoubleに代入されるため3.0となる。"
+  },
+  {
+    "category": "データ型と変数",
+    "difficulty": 1,
+    "body": "次のうち、有効なJavaのリテラルはどれか。",
+    "codeBlock": null,
+    "options": ["int x = 1_000_000;", "int x = 0b1234;", "int x = 09;", "int x = 1.0;"],
+    "answerIndex": 0,
+    "explanation": "Javaではアンダースコア区切りの数値リテラルが使用できる。0b始まりは2進数だが0b1234は無効（2進数に2以上の数字は使えない）。09はOctal（8進数）で9は使えない。1.0はdoubleリテラルなのでint変数に直接代入できない。"
+  },
+  {
+    "category": "データ型と変数",
+    "difficulty": 2,
+    "body": "次のコードのコンパイル結果として正しいものはどれか。",
+    "codeBlock": "byte b = 127;\nb = b + 1;\nSystem.out.println(b);",
+    "options": ["-128", "128", "コンパイルエラー", "0"],
+    "answerIndex": 2,
+    "explanation": "byte型への代入でint型の演算結果を直接代入しようとするためコンパイルエラーとなる。b+1はint型になるため、byteへの暗黙のキャストは行われない。(byte)(b+1)と書けばコンパイルでき、-128になる。"
+  },
+  {
+    "category": "データ型と変数",
+    "difficulty": 2,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "String s1 = \"hello\";\nString s2 = \"hello\";\nString s3 = new String(\"hello\");\nSystem.out.println(s1 == s2);\nSystem.out.println(s1 == s3);",
+    "options": ["true\nfalse", "true\ntrue", "false\nfalse", "false\ntrue"],
+    "answerIndex": 0,
+    "explanation": "文字列リテラルは文字列プールで管理されるため、同じリテラル値はs1==s2でtrueになる。new String()は新しいオブジェクトを生成するためs1==s3はfalse。equals()ならどちらもtrue。"
+  },
+  {
+    "category": "データ型と変数",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "int i = Integer.MAX_VALUE;\nSystem.out.println(i + 1);",
+    "options": ["-2147483648", "2147483648", "オーバーフローエラー", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "Javaのint型はオーバーフローしても例外は発生しない。Integer.MAX_VALUE（2147483647）に1を加えるとラップアラウンドが起き、Integer.MIN_VALUE（-2147483648）になる。"
+  },
+  {
+    "category": "データ型と変数",
+    "difficulty": 2,
+    "body": "次のうち、varを使った変数宣言として正しいものはどれか。（Java 11）",
+    "codeBlock": null,
+    "options": ["var list = new ArrayList<>();", "var x;", "var x = null;", "public var name = \"Java\";"],
+    "answerIndex": 0,
+    "explanation": "varはローカル変数型推論で、初期化式から型を推論する。型を推論できない「var x;」「var x = null;」はコンパイルエラー。varはフィールドや引数には使えないためpublic varもエラー。"
+  },
+  {
+    "category": "演算子",
+    "difficulty": 1,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "int a = 5;\nint b = 3;\nSystem.out.println(a % b);",
+    "options": ["2", "1", "0", "1.666..."],
+    "answerIndex": 0,
+    "explanation": "% は剰余演算子。5 ÷ 3 = 1余り2 なので、結果は2。"
+  },
+  {
+    "category": "演算子",
+    "difficulty": 2,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "int x = 10;\nSystem.out.println(x++);\nSystem.out.println(x);",
+    "options": ["10\n11", "11\n11", "10\n10", "11\n12"],
+    "answerIndex": 0,
+    "explanation": "x++は後置インクリメント。println(x++)では現在のxの値（10）を返してから+1する。次のprintln(x)では11が出力される。"
+  },
+  {
+    "category": "演算子",
+    "difficulty": 2,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "boolean a = true;\nboolean b = false;\nSystem.out.println(a & b);\nSystem.out.println(a && b);",
+    "options": ["false\nfalse", "true\nfalse", "false\ntrue", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "&は非短絡評価（両辺を常に評価）、&&は短絡評価（左辺がfalseなら右辺を評価しない）。どちらも論理積なので結果は同じfalse。違いは副作用がある場合に現れる。"
+  },
+  {
+    "category": "演算子",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "int a = 0b1010;\nint b = 0b1100;\nSystem.out.println(a ^ b);\nSystem.out.println(Integer.toBinaryString(a ^ b));",
+    "options": ["6\n110", "14\n1110", "22\n10110", "2\n10"],
+    "answerIndex": 0,
+    "explanation": "^はXOR（排他的論理和）。1010 XOR 1100 = 0110（=6）。同じビットが0、異なるビットが1になる。"
+  },
+  {
+    "category": "演算子",
+    "difficulty": 2,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "String s = null;\nSystem.out.println(\"value: \" + s);",
+    "options": ["value: null", "NullPointerException", "value: ", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "Java では文字列連結時に null は \"null\" という文字列に変換される。NullPointerException は発生しない。"
+  },
+  {
+    "category": "制御フロー",
+    "difficulty": 1,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "for (int i = 0; i < 3; i++) {\n    if (i == 1) continue;\n    System.out.print(i + \" \");\n}",
+    "options": ["0 2 ", "0 1 2 ", "0 ", "2 "],
+    "answerIndex": 0,
+    "explanation": "continueは現在のイテレーションをスキップして次に進む。i==1のとき出力をスキップするので0と2のみ出力される。"
+  },
+  {
+    "category": "制御フロー",
+    "difficulty": 2,
+    "body": "次のswitchステートメントの出力として正しいものはどれか。",
+    "codeBlock": "int n = 2;\nswitch (n) {\n    case 1:\n        System.out.println(\"one\");\n    case 2:\n        System.out.println(\"two\");\n    case 3:\n        System.out.println(\"three\");\n        break;\n    default:\n        System.out.println(\"other\");\n}",
+    "options": ["two\nthree", "two", "one\ntwo\nthree", "two\nthree\nother"],
+    "answerIndex": 0,
+    "explanation": "switchはbreakがないとフォールスルー（fall-through）する。case 2にマッチし、breakがないのでcase 3も実行される。case 3にbreakがあるのでdefaultは実行されない。"
+  },
+  {
+    "category": "制御フロー",
+    "difficulty": 2,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "outer:\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 3; j++) {\n        if (j == 1) break outer;\n        System.out.print(i + \"\" + j + \" \");\n    }\n}",
+    "options": ["00 ", "00 10 20 ", "00 01 ", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "ラベル付きbreakはouterループごと抜ける。i=0,j=0でまず\"00\"を出力し、j=1でbreak outerが実行されて外側ループも終了する。"
+  },
+  {
+    "category": "制御フロー",
+    "difficulty": 1,
+    "body": "do-whileループについて正しい説明はどれか。",
+    "codeBlock": null,
+    "options": ["ループ本体が必ず1回以上実行される", "条件が最初からfalseでも1回は実行されない", "whileループと完全に同じ動作をする", "Javaにはdo-whileループは存在しない"],
+    "answerIndex": 0,
+    "explanation": "do-whileループは条件チェックの前にループ本体を実行するため、条件が最初からfalseでも必ず1回は実行される。これがwhileループとの最大の違い。"
+  },
+  {
+    "category": "制御フロー",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "int i = 0;\nwhile (i < 5) {\n    i++;\n    if (i == 3) continue;\n    if (i == 4) break;\n    System.out.print(i + \" \");\n}",
+    "options": ["1 2 ", "1 2 4 ", "1 2 3 4 5 ", "1 2 3 "],
+    "answerIndex": 0,
+    "explanation": "i=1,2で出力される。i=3でcontinueにより出力をスキップ。i=4でbreakによりループ終了。i=5には到達しない。"
+  },
+  {
+    "category": "オブジェクト指向",
+    "difficulty": 1,
+    "body": "Javaのクラスの継承について正しい説明はどれか。",
+    "codeBlock": null,
+    "options": ["1つのクラスは1つのクラスしか継承できない", "1つのクラスは複数のクラスを継承できる", "finalクラスは継承できるがオーバーライドできない", "abstractクラスはインスタンス化できる"],
+    "answerIndex": 0,
+    "explanation": "Javaは単一継承のみサポートしており、1つのクラスが継承できる親クラスは1つだけ。複数のインターフェースを実装することは可能。finalクラスは継承自体ができない。abstractクラスはインスタンス化できない。"
+  },
+  {
+    "category": "オブジェクト指向",
+    "difficulty": 2,
+    "body": "次のコードのコンパイルと実行結果として正しいものはどれか。",
+    "codeBlock": "class Animal {\n    String speak() { return \"...\"; }\n}\nclass Dog extends Animal {\n    @Override\n    String speak() { return \"Woof\"; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        System.out.println(a.speak());\n    }\n}",
+    "options": ["Woof", "...", "コンパイルエラー", "実行時エラー"],
+    "answerIndex": 0,
+    "explanation": "Javaでは動的ディスパッチ（ポリモーフィズム）により、参照型（Animal）ではなく実際のオブジェクト型（Dog）のメソッドが呼ばれる。これをランタイムポリモーフィズムという。"
+  },
+  {
+    "category": "オブジェクト指向",
+    "difficulty": 2,
+    "body": "インターフェースのdefaultメソッドについて正しい説明はどれか。（Java 8以降）",
+    "codeBlock": null,
+    "options": ["実装クラスでオーバーライドできる", "abstractキーワードが必須", "staticとして定義しなければならない", "インターフェースではdefaultメソッドは使えない"],
+    "answerIndex": 0,
+    "explanation": "Java 8から導入されたdefaultメソッドはインターフェースにデフォルト実装を持てる機能。実装クラスでオーバーライド可能。abstractキーワードは不要。staticである必要はない。"
+  },
+  {
+    "category": "オブジェクト指向",
+    "difficulty": 3,
+    "body": "次のコードのコンパイルと実行結果として正しいものはどれか。",
+    "codeBlock": "interface Flyable {\n    default String move() { return \"fly\"; }\n}\ninterface Swimmable {\n    default String move() { return \"swim\"; }\n}\nclass Duck implements Flyable, Swimmable {\n    @Override\n    public String move() { return Flyable.super.move(); }\n}\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(new Duck().move());\n    }\n}",
+    "options": ["fly", "swim", "コンパイルエラー", "実行時エラー"],
+    "answerIndex": 0,
+    "explanation": "複数のインターフェースに同名のdefaultメソッドがある場合、実装クラスでオーバーライドが必須（しなければコンパイルエラー）。Flyable.super.move()でFlyableのdefault実装を明示的に呼ぶことができる。"
+  },
+  {
+    "category": "オブジェクト指向",
+    "difficulty": 2,
+    "body": "アクセス修飾子の範囲が広い順に並んでいるものはどれか。",
+    "codeBlock": null,
+    "options": ["public > protected > package-private > private", "public > package-private > protected > private", "protected > public > package-private > private", "public > protected > private > package-private"],
+    "answerIndex": 0,
+    "explanation": "Javaのアクセス修飾子の範囲：public（全クラス）> protected（同パッケージ＋サブクラス）> package-private（修飾子なし、同パッケージのみ）> private（同クラスのみ）。"
+  },
+  {
+    "category": "オブジェクト指向",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "class Parent {\n    Parent() { System.out.print(\"P \"); }\n}\nclass Child extends Parent {\n    Child() {\n        System.out.print(\"C \");\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        new Child();\n    }\n}",
+    "options": ["P C ", "C P ", "C ", "P "],
+    "answerIndex": 0,
+    "explanation": "サブクラスのコンストラクタは最初に暗黙的にsuper()を呼ぶ。ChildのコンストラクタはまずParent()を呼んで\"P\"を出力し、次に自身の\"C\"を出力する。"
+  },
+  {
+    "category": "例外処理",
+    "difficulty": 1,
+    "body": "次のうち、チェック例外（Checked Exception）はどれか。",
+    "codeBlock": null,
+    "options": ["IOException", "NullPointerException", "ArrayIndexOutOfBoundsException", "IllegalArgumentException"],
+    "answerIndex": 0,
+    "explanation": "チェック例外はコンパイラがcatch/throwsを強制する例外。IOExceptionはチェック例外の代表例。NullPointerException、ArrayIndexOutOfBoundsException、IllegalArgumentExceptionはRuntimeException（非チェック例外）のサブクラス。"
+  },
+  {
+    "category": "例外処理",
+    "difficulty": 2,
+    "body": "try-with-resources文について正しい説明はどれか。",
+    "codeBlock": null,
+    "options": ["AutoCloseableを実装したリソースが自動的にclose()される", "finally句が不要になりリソースは自動的に解放されない", "catchブロックは必須", "Java 6以前から使用できる"],
+    "answerIndex": 0,
+    "explanation": "try-with-resourcesはJava 7から追加。try()の括弧内でAutoCloseableを実装したオブジェクトを宣言するとtryブロック終了後に自動でclose()される。catchもfinallyも省略可能。"
+  },
+  {
+    "category": "例外処理",
+    "difficulty": 2,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "try {\n    System.out.print(\"try \");\n    throw new RuntimeException();\n} catch (RuntimeException e) {\n    System.out.print(\"catch \");\n} finally {\n    System.out.print(\"finally\");\n}",
+    "options": ["try catch finally", "try finally", "try catch", "catch finally"],
+    "answerIndex": 0,
+    "explanation": "finallyブロックは例外がキャッチされたかどうかに関わらず必ず実行される。try→例外発生→catch→finallyの順に実行される。"
+  },
+  {
+    "category": "例外処理",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "try {\n    System.out.print(\"A\");\n    return;\n} finally {\n    System.out.print(\"B\");\n}",
+    "options": ["AB", "A", "B", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "finally ブロックは return が実行される前にも実行される。try内でreturnが実行されるが、メソッドを抜ける前にfinallyが実行されるため\"AB\"と出力される。"
+  },
+  {
+    "category": "例外処理",
+    "difficulty": 2,
+    "body": "カスタム例外クラスを作成する場合、チェック例外として定義するには何を継承すべきか。",
+    "codeBlock": null,
+    "options": ["Exception", "RuntimeException", "Error", "Throwable"],
+    "answerIndex": 0,
+    "explanation": "Exceptionを継承しRuntimeExceptionを継承しないとチェック例外になる。RuntimeExceptionを継承すると非チェック例外になる。通常はExceptionかRuntimeExceptionのどちらかを直接継承するのが一般的。"
+  },
+  {
+    "category": "例外処理",
+    "difficulty": 3,
+    "body": "次のコードのコンパイル結果として正しいものはどれか。",
+    "codeBlock": "try {\n    throw new IOException();\n} catch (IOException | RuntimeException e) {\n    System.out.println(e.getMessage());\n}",
+    "options": ["正常にコンパイルされる", "multi-catchは同じ継承関係にある例外を含められないためエラー", "catchブロックは1つしか書けないためエラー", "IOExceptionはチェック例外のためエラー"],
+    "answerIndex": 0,
+    "explanation": "Java 7から導入されたmulti-catch構文（|で複数の例外型を並べる）。継承関係にない例外型を並べることができる。IOExceptionとRuntimeExceptionは継承関係にないため有効。"
+  },
+  {
+    "category": "コレクション",
+    "difficulty": 1,
+    "body": "次のうち、要素の重複を許さないコレクションインターフェースはどれか。",
+    "codeBlock": null,
+    "options": ["Set", "List", "Queue", "Deque"],
+    "answerIndex": 0,
+    "explanation": "SetはJava Collections Frameworkのインターフェースで、重複要素を許さない。ListはインデックスアクセスできるがListは重複を許す。QueueとDequeはキュー系でやはり重複を許す。"
+  },
+  {
+    "category": "コレクション",
+    "difficulty": 2,
+    "body": "HashMapについて正しい説明はどれか。",
+    "codeBlock": null,
+    "options": ["nullキーと複数のnull値を許容する", "要素の挿入順序が保証される", "スレッドセーフである", "重複キーを許容する"],
+    "answerIndex": 0,
+    "explanation": "HashMapはnullキーを1つと複数のnull値を許容する。挿入順序保証はLinkedHashMap。スレッドセーフはConcurrentHashMapまたはCollections.synchronizedMap()。重複キーは上書きされる。"
+  },
+  {
+    "category": "コレクション",
+    "difficulty": 2,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));\nlist.removeIf(n -> n % 2 == 0);\nSystem.out.println(list);",
+    "options": ["[1, 3, 5]", "[2, 4]", "[1, 2, 3, 4, 5]", "UnsupportedOperationException"],
+    "answerIndex": 0,
+    "explanation": "removeIf()はJava 8で追加されたメソッドで、述語（Predicate）に一致する要素を削除する。n%2==0は偶数を意味するので、偶数（2,4）が削除されて奇数（1,3,5）が残る。"
+  },
+  {
+    "category": "コレクション",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "Map<String, Integer> map = new TreeMap<>();\nmap.put(\"banana\", 2);\nmap.put(\"apple\", 1);\nmap.put(\"cherry\", 3);\nmap.forEach((k, v) -> System.out.print(k + \" \"));",
+    "options": ["apple banana cherry ", "banana apple cherry ", "cherry apple banana ", "順序は不定"],
+    "answerIndex": 0,
+    "explanation": "TreeMapは自然順序（アルファベット順）でキーをソートする。HashMapは順序不定、LinkedHashMapは挿入順を保持する。"
+  },
+  {
+    "category": "コレクション",
+    "difficulty": 2,
+    "body": "List.of()で作成したリストについて正しい説明はどれか。（Java 9以降）",
+    "codeBlock": null,
+    "options": ["変更不可能（immutable）なリストを返す", "nullを追加できる", "add()で要素を追加できる", "ArrayListのインスタンスを返す"],
+    "answerIndex": 0,
+    "explanation": "Java 9で追加されたList.of()はimmutable（変更不可能）なリストを返す。add()やremove()を呼ぶとUnsupportedOperationExceptionが発生する。nullも追加できず、NullPointerExceptionが発生する。"
+  },
+  {
+    "category": "コレクション",
+    "difficulty": 3,
+    "body": "次のコードの出力として正しいものはどれか。",
+    "codeBlock": "Deque<Integer> deque = new ArrayDeque<>();\ndeque.push(1);\ndeque.push(2);\ndeque.push(3);\nSystem.out.println(deque.pop());\nSystem.out.println(deque.peek());",
+    "options": ["3\n2", "1\n2", "3\n3", "1\n1"],
+    "answerIndex": 0,
+    "explanation": "DequeのpushはスタックのようにLIFO（後入れ先出し）で先頭に追加する。1,2,3の順でpushすると先頭から3,2,1の順。pop()で先頭の3を取り出し、peek()は取り出さず次の2を参照する。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 1,
+    "body": "次のラムダ式と等価な匿名クラスの実装はどれか。",
+    "codeBlock": "Runnable r = () -> System.out.println(\"Hello\");",
+    "options": ["Runnable r = new Runnable() { public void run() { System.out.println(\"Hello\"); } };", "Runnable r = new Runnable() { void run() { System.out.println(\"Hello\"); } };", "Runnable r = new Runnable(System.out::println(\"Hello\"));", "Runnable r = () -> { return System.out.println(\"Hello\"); };"],
+    "answerIndex": 0,
+    "explanation": "ラムダ式はFunctionalInterface（抽象メソッドが1つのインターフェース）の匿名実装。Runnableのrunメソッドはpublicかつvoidなので、public void run()を実装する選択肢が正解。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 2,
+    "body": "次のStreamパイプラインの出力として正しいものはどれか。",
+    "codeBlock": "List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5);\nint sum = nums.stream()\n    .filter(n -> n % 2 != 0)\n    .mapToInt(Integer::intValue)\n    .sum();\nSystem.out.println(sum);",
+    "options": ["9", "15", "6", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "filter(n -> n%2!=0)で奇数のみ抽出（1,3,5）、mapToIntでIntStreamに変換、sum()で合計。1+3+5=9。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 2,
+    "body": "メソッド参照「System.out::println」と等価なラムダ式はどれか。",
+    "codeBlock": null,
+    "options": ["x -> System.out.println(x)", "() -> System.out.println()", "x -> System.out.println", "System.out.println()"],
+    "answerIndex": 0,
+    "explanation": "System.out::printlnはインスタンスメソッド参照。引数xを受け取ってSystem.out.println(x)を呼ぶラムダ式と等価。メソッド参照は4種類：静的、インスタンス（特定）、インスタンス（任意）、コンストラクタ参照。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 3,
+    "body": "次のコードの出力として正しいものはどれか。",
+    "codeBlock": "List<String> words = Arrays.asList(\"apple\", \"banana\", \"cherry\");\nString result = words.stream()\n    .filter(s -> s.length() > 5)\n    .map(String::toUpperCase)\n    .collect(Collectors.joining(\", \"));\nSystem.out.println(result);",
+    "options": ["BANANA, CHERRY", "banana, cherry", "APPLE, BANANA, CHERRY", "BANANA"],
+    "answerIndex": 0,
+    "explanation": "filter(s -> s.length() > 5)で6文字以上の\"banana\"(6文字)と\"cherry\"(6文字)が残る（\"apple\"は5文字で除外）。map(String::toUpperCase)で大文字化。Collectors.joining(\", \")で\", \"区切りで結合。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 2,
+    "body": "Optional<T>について正しい説明はどれか。",
+    "codeBlock": null,
+    "options": ["null安全にラップして値の有無を表現するコンテナ", "スレッドセーフなコレクション", "遅延評価する値の型", "Optionalはプリミティブ型のみに使用できる"],
+    "answerIndex": 0,
+    "explanation": "OptionalはJava 8から導入されたnullの代替として使用するコンテナクラス。isPresent()やorElse()でnullチェックを宣言的に書ける。スレッドセーフではなくオブジェクト型に使用する。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 3,
+    "body": "次のコードの出力として正しいものはどれか。",
+    "codeBlock": "Optional<String> opt = Optional.of(\"hello\");\nString result = opt\n    .filter(s -> s.startsWith(\"h\"))\n    .map(String::toUpperCase)\n    .orElse(\"not found\");\nSystem.out.println(result);",
+    "options": ["HELLO", "hello", "not found", "NullPointerException"],
+    "answerIndex": 0,
+    "explanation": "Optional.of(\"hello\")は値\"hello\"を持つOptional。filter(s -> s.startsWith(\"h\"))は\"hello\"がhで始まるのでそのまま。map(String::toUpperCase)で\"HELLO\"に変換。orElse()は値がある場合は無視される。"
+  },
+  {
+    "category": "モジュールシステム",
+    "difficulty": 1,
+    "body": "Java 9で導入されたモジュールシステム（JPMS）でモジュールを定義するファイル名として正しいものはどれか。",
+    "codeBlock": null,
+    "options": ["module-info.java", "module.java", "Module.java", "module-descriptor.java"],
+    "answerIndex": 0,
+    "explanation": "Javaモジュールシステム（Project Jigsaw）では、モジュールのルートにmodule-info.javaを配置してモジュールを定義する。このファイルでrequires（依存）とexports（公開）を宣言する。"
+  },
+  {
+    "category": "モジュールシステム",
+    "difficulty": 2,
+    "body": "module-info.javaの記述として正しいものはどれか。",
+    "codeBlock": null,
+    "options": ["module com.example.myapp { requires java.sql; exports com.example.api; }", "package com.example.myapp; requires java.sql;", "module com.example.myapp extends java.base { }", "import com.example.api; module com.example.myapp { }"],
+    "answerIndex": 0,
+    "explanation": "module-info.javaはmoduleキーワードでモジュール名を宣言し、requiresで依存モジュールを指定、exportsで公開するパッケージを指定する。packageやimport宣言は含まない。"
+  },
+  {
+    "category": "モジュールシステム",
+    "difficulty": 2,
+    "body": "モジュールシステムにおけるopensキーワードの説明として正しいものはどれか。",
+    "codeBlock": null,
+    "options": ["リフレクションによるアクセスも含めてパッケージを公開する", "コンパイル時のみパッケージを公開する", "exportsと全く同じ意味", "モジュール外からのアクセスを完全に禁止する"],
+    "answerIndex": 0,
+    "explanation": "exportsはコンパイル時・実行時の通常アクセスを許可するが、リフレクションは禁止。opensはリフレクションを含むすべてのアクセスを許可する。フレームワーク（Spring、Hibernateなど）がリフレクションを使う場合に必要。"
+  },
+  {
+    "category": "モジュールシステム",
+    "difficulty": 3,
+    "body": "モジュールシステムを使用するプロジェクトで、クラスパス上の非モジュールJARはどのように扱われるか。",
+    "codeBlock": null,
+    "options": ["自動的に「名称未設定モジュール（unnamed module）」としてまとめられる", "モジュールとして自動的に認識される", "アクセス不可となりClassNotFoundExceptionが発生する", "module-info.javaを追加しなければ使用できない"],
+    "answerIndex": 0,
+    "explanation": "モジュールシステムではクラスパス上のJARは「unnamed module（名称未設定モジュール）」としてまとめられ、全モジュールから読み取り可能。既存コードとの後方互換性を保つための仕組み。"
+  },
+  {
+    "category": "モジュールシステム",
+    "difficulty": 2,
+    "body": "jlinkコマンドの説明として正しいものはどれか。",
+    "codeBlock": null,
+    "options": ["アプリに必要なモジュールのみを含んだカスタムJREを作成する", "Javaソースコードをコンパイルする", "モジュールの依存関係を表示する", "JARファイルを作成する"],
+    "answerIndex": 0,
+    "explanation": "jlinkはJava 9で導入されたツールで、アプリケーションが必要とするモジュールのみを含んだ最小構成のカスタムランタイムイメージを作成できる。不要なモジュールを除くことでサイズを大幅削減できる。"
+  },
+  {
+    "category": "データ型と変数",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "char c = 'A';\nc += 1;\nSystem.out.println(c);",
+    "options": ["B", "66", "コンパイルエラー", "A1"],
+    "answerIndex": 0,
+    "explanation": "char型への複合代入演算子（+=）は暗黙のキャストが行われる。'A'のUnicodeは65で、65+1=66の文字'B'がchar型として代入される。"
+  },
+  {
+    "category": "演算子",
+    "difficulty": 3,
+    "body": "次のコードを実行した場合の出力として正しいものはどれか。",
+    "codeBlock": "int a = 10;\nint b = a >> 1;\nint c = a >>> 1;\nSystem.out.println(b + \" \" + c);",
+    "options": ["5 5", "5 -5", "-5 5", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": ">>は算術右シフト（符号ビットを保持）、>>>は論理右シフト（0で埋める）。正の数の場合、どちらも同じ結果。10>>1=5、10>>>1=5。負の数で差が出る（例：-10>>1=-5、-10>>>1=2147483643）。"
+  },
+  {
+    "category": "オブジェクト指向",
+    "difficulty": 2,
+    "body": "次のコードのコンパイルと実行結果として正しいものはどれか。",
+    "codeBlock": "abstract class Shape {\n    abstract double area();\n    void print() {\n        System.out.println(\"Area: \" + area());\n    }\n}\nclass Circle extends Shape {\n    double r;\n    Circle(double r) { this.r = r; }\n    @Override\n    double area() { return Math.PI * r * r; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        new Circle(1).print();\n    }\n}",
+    "options": ["Area: 3.141592653589793", "コンパイルエラー", "Area: 0.0", "実行時エラー"],
+    "answerIndex": 0,
+    "explanation": "abstractクラスはインスタンス化できないが、具体的なサブクラス（Circle）でインスタンス化できる。abstractメソッドarea()はCircleでオーバーライドされており、templateメソッドパターン的にprint()からarea()が呼ばれる。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 2,
+    "body": "次のうち、関数型インターフェース（Functional Interface）として正しいものはどれか。",
+    "codeBlock": null,
+    "options": ["Predicate<T>", "List<T>", "ArrayList<T>", "Scanner"],
+    "answerIndex": 0,
+    "explanation": "関数型インターフェースは抽象メソッドをちょうど1つ持つインターフェース。Predicate<T>はtest()という1つの抽象メソッドを持つ。@FunctionalInterfaceアノテーションで明示できるが必須ではない。"
+  },
+  {
+    "category": "コレクション",
+    "difficulty": 2,
+    "body": "次のコードの出力として正しいものはどれか。",
+    "codeBlock": "Set<String> set = new HashSet<>(Arrays.asList(\"a\", \"b\", \"a\", \"c\"));\nSystem.out.println(set.size());",
+    "options": ["3", "4", "2", "コンパイルエラー"],
+    "answerIndex": 0,
+    "explanation": "HashSetは重複を許さない。\"a\"が2回含まれているが、SetはEqualsで同値と判断された要素を1つしか保持しない。よってa,b,cの3要素となりsize()は3。"
+  },
+  {
+    "category": "例外処理",
+    "difficulty": 2,
+    "body": "次のコードの出力として正しいものはどれか。",
+    "codeBlock": "try {\n    int[] arr = new int[3];\n    arr[5] = 10;\n} catch (ArrayIndexOutOfBoundsException e) {\n    System.out.print(\"A\");\n} catch (RuntimeException e) {\n    System.out.print(\"B\");\n} catch (Exception e) {\n    System.out.print(\"C\");\n}",
+    "options": ["A", "B", "C", "ABC"],
+    "answerIndex": 0,
+    "explanation": "catchブロックは上から順に評価される。ArrayIndexOutOfBoundsExceptionはRuntimeExceptionのサブクラスなので最初のcatchで捕捉される。より具体的な例外型を上に書くのが正しい順序。"
+  },
+  {
+    "category": "制御フロー",
+    "difficulty": 2,
+    "body": "switch式（Java 14以降のstandard feature）として正しい構文はどれか。",
+    "codeBlock": null,
+    "options": ["int result = switch (day) { case MONDAY -> 1; case TUESDAY -> 2; default -> 0; };", "int result = switch (day) { case MONDAY: yield 1; }", "switch (day) -> result;", "int result = switch day { MONDAY -> 1; }"],
+    "answerIndex": 0,
+    "explanation": "Java 14でswitchが式として使えるようになった。アロー構文（->）を使うとbreakなしでフォールスルーを防げる。yieldキーワードで値を返すことも可能。defaultは全ケースを網羅していない場合に必要。"
+  },
+  {
+    "category": "ラムダ式・Stream API",
+    "difficulty": 3,
+    "body": "次のStream操作で、遅延評価（lazy evaluation）される中間操作はどれか。",
+    "codeBlock": null,
+    "options": ["filter()", "collect()", "count()", "forEach()"],
+    "answerIndex": 0,
+    "explanation": "Streamの中間操作（filter, map, sortedなど）は遅延評価される。終端操作（collect, count, forEach, reduceなど）が呼ばれるまで実際には処理が行われない。これにより不要な処理を避けて効率的に処理できる。"
+  },
+  {
+    "category": "モジュールシステム",
+    "difficulty": 1,
+    "body": "Javaの標準ライブラリのベースモジュール名として正しいものはどれか。",
+    "codeBlock": null,
+    "options": ["java.base", "java.core", "java.standard", "java.util"],
+    "answerIndex": 0,
+    "explanation": "java.baseはJavaモジュールシステムの基盤となるモジュールで、java.lang、java.util、java.ioなど最も基本的なAPIを含む。すべてのモジュールが暗黙的にjava.baseに依存している（requiresを書かなくてよい）。"
+  }
+]

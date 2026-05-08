@@ -1,0 +1,22 @@
+# Next.js
+.next/
+out/
+build/
+
+# Node.js
+node_modules/
+
+# 環境変数（機密情報）
+.env.local
+.env
+
+# Prisma SQLite DB
+prisma/*.db
+prisma/*.db-journal
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
