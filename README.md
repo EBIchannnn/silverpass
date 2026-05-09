@@ -131,3 +131,39 @@ silverpass/
 - [ ] 弱点分析・復習モード
 - [ ] Vercelデプロイ（PlanetScale DB）
 - [ ] 問題数の拡充（200問+）
+
+## 本番デプロイ手順（Vercel + Supabase）
+
+### 1. Supabaseでデータベースを作成
+1. [supabase.com](https://supabase.com) でプロジェクトを作成
+2. リージョン: `Northeast Asia (Tokyo)` を選択
+3. 「Settings」→「Database」→「Connection string」→「URI」をコピー
+
+### 2. Vercelにデプロイ
+1. [vercel.com](https://vercel.com) でGitHubリポジトリ `EBIchannnn/silverpass` をインポート
+2. 以下の環境変数を設定：
+
+| 変数名 | 説明 |
+|--------|------|
+| `DATABASE_URL` | SupabaseのPostgreSQL接続URL |
+| `ANTHROPIC_API_KEY` | Anthropic APIキー |
+| `NEXTAUTH_SECRET` | NextAuth署名用シークレット（`openssl rand -base64 32` で生成） |
+| `NEXTAUTH_URL` | デプロイ後のURL（例: `https://silverpass.vercel.app`） |
+| `GOOGLE_CLIENT_ID` | Google OAuth クライアントID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth シークレット |
+
+3. 「Deploy」を実行
+
+### 3. DBのマイグレーションとシードデータ投入
+ローカルの `.env.local` に本番の `DATABASE_URL` を設定した上で：
+
+```bash
+npx prisma migrate deploy
+npm run db:seed
+```
+
+### 4. Google OAuthのリダイレクトURIを追加
+Google Cloud Consoleの承認済みリダイレクトURIに追加：
+```
+https://[あなたのドメイン].vercel.app/api/auth/callback/google
+```
