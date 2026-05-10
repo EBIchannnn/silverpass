@@ -57,17 +57,25 @@ export default function QuizPage() {
 
   const fetchQuestions = useCallback(async (category: string) => {
     setLoading(true)
-    const params = new URLSearchParams({ limit: '50' })
-    if (category !== 'all') params.set('category', category)
-    const res = await fetch(`/api/quiz?${params}`)
-    const data = await res.json() as Question[]
-    // ランダムに並び替え
-    const shuffled = [...data].sort(() => Math.random() - 0.5)
-    setQuestions(shuffled)
-    setCurrentIndex(0)
-    setAnswered(null)
-    setSelectedIndex(null)
-    setLoading(false)
+    try {
+      const params = new URLSearchParams({ limit: '50' })
+      if (category !== 'all') params.set('category', category)
+      const res = await fetch(`/api/quiz?${params}`)
+      const data = await res.json()
+      if (!res.ok || !Array.isArray(data)) {
+        setQuestions([])
+      } else {
+        const shuffled = [...(data as Question[])].sort(() => Math.random() - 0.5)
+        setQuestions(shuffled)
+      }
+    } catch {
+      setQuestions([])
+    } finally {
+      setCurrentIndex(0)
+      setAnswered(null)
+      setSelectedIndex(null)
+      setLoading(false)
+    }
   }, [])
 
   // 今日の回答数を取得（ログイン済みの場合）
