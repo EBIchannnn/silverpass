@@ -4,7 +4,7 @@
 
 ### 実装済み機能
 - [x] Next.js 14 App Router プロジェクト構築
-- [x] Prisma + SQLite データベース設計・マイグレーション
+- [x] Prisma + PostgreSQL (Supabase) データベース設計・マイグレーション
 - [x] 問題データ54問（8カテゴリ）作成・シード投入
 - [x] 問題演習画面（カテゴリフィルター・ランダム出題）
 - [x] コードブロックのシンタックスハイライト（highlight.js）
@@ -24,6 +24,32 @@
 
 ---
 
+## Phase 3 Vercel デプロイ ✅ 完了（2026-05-10）
+
+### 実施済み
+- [x] DBプロバイダーを SQLite → PostgreSQL (Supabase) に移行
+- [x] `migration_lock.toml` の provider を `postgresql` に修正
+- [x] Supabase へ `prisma migrate deploy` 適用済み（マイグレーション適用済み確認）
+- [x] Supabase へシードデータ54問投入済み
+- [x] `vercel.json` に `prisma generate && next build` を設定済み
+- [x] GitHub へ push 済み (`EBIchannnn/silverpass`)
+- [ ] Vercel プロジェクト作成・環境変数設定（手動作業 → 下記参照）
+- [ ] `NEXTAUTH_URL` を本番URLに変更
+- [ ] Google OAuth のリダイレクト URI に本番URLを追加
+
+### Vercel 環境変数（設定必須）
+
+| 変数名 | 値 |
+|--------|-----|
+| `DATABASE_URL` | Supabase の接続文字列 |
+| `ANTHROPIC_API_KEY` | Anthropic APIキー |
+| `NEXTAUTH_SECRET` | 署名用シークレット |
+| `NEXTAUTH_URL` | `https://[デプロイ後のドメイン].vercel.app` |
+| `GOOGLE_CLIENT_ID` | Google OAuth クライアントID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth シークレット |
+
+---
+
 ## Phase 2 Stripe決済（未着手）
 
 ### TODO
@@ -34,19 +60,6 @@
 - [ ] `User.isPremium` フラグの自動更新
 - [ ] プレミアムアップグレード画面 (`/pricing`)
 - [ ] 制限解除ロジックの動作確認
-
----
-
-## Phase 3 Vercel デプロイ（未着手）
-
-### TODO
-- [ ] PlanetScale アカウント作成・DB作成
-- [ ] `schema.prisma` の provider を `mysql` に変更
-- [ ] `DATABASE_URL` を PlanetScale の接続文字列に変更
-- [ ] Vercel プロジェクト作成・環境変数設定
-- [ ] `NEXTAUTH_URL` を本番URLに変更
-- [ ] Google OAuth のリダイレクト URI に本番URLを追加
-- [ ] 初回デプロイ・動作確認
 
 ---
 
